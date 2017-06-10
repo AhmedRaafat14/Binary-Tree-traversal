@@ -1,3 +1,6 @@
+import Queue
+
+
 class Node:
     def __init__(self, data):
         self.nodeData = data
@@ -13,6 +16,33 @@ def display(root, full_depth):
 
     display(root.leftNode, full_depth - 1)
     display(root.rightNode, full_depth - 1)
+
+def display1(root):
+    if root == None:
+        return
+
+    nodes = Queue.Queue()
+
+    nodes.put(root)
+
+    while 1:
+
+        if nodes.qsize() == 0:
+            break
+        nodeLevels = nodes.qsize()
+        while nodeLevels > 0:
+            node = nodes.get()
+
+            print node.nodeData,
+
+            if node.leftNode != None:
+                nodes.put(node.leftNode)
+            if node.rightNode != None:
+                nodes.put(node.rightNode)
+            nodeLevels -= 1
+
+        print("")
+
 
 
 
@@ -48,6 +78,8 @@ root.rightNode.rightNode.leftNode  =  Node(1)  # Left child for node 7
 root.rightNode.rightNode.rightNode =  Node(10) # right child for node 7
 
 
-for i in range(0, 4):
-    display(root, i)
-    print("")
+# for i in range(0, 4):
+#     display(root, i)
+#     print("")
+
+display1(root)
